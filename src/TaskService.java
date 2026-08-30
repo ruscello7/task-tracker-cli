@@ -1,15 +1,18 @@
 public class TaskService {
     private TaskRepository repository;
 
+    private int nextId = 1;
+
     public TaskService(TaskRepository repository) {
         this.repository = repository;
     }
 
-    public void CreateTask(String title, String description) {
+    public void createTask(String title, String description) {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Title cannot be null or blank");
         }
-        repository.create(new Task(0, title, description));
+        repository.create(new Task(nextId, title, description));
+        nextId++;
     }
 
 }
